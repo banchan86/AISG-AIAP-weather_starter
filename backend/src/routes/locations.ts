@@ -111,7 +111,16 @@ export function createLocationsRouter(options: LocationsRouterOptions = {}): Rou
       }
 
       const snapshot = await weatherClient.getCurrentWeather(location.latitude, location.longitude);
-      const updated = await updateWeather(locationId, snapshot);
+
+      // Preserve previously-known fields when a transient API failure returns null,
+      // so a rate-limited two-hr-forecast call doesn't wipe the stored area name.
+      const merged = {
+        ...snapshot,
+        area: snapshot.area ?? location.weather.area,
+        condition: snapshot.condition || location.weather.condition,
+      };
+
+      const updated = await updateWeather(locationId, merged);
       response.json(updated);
     } catch (error) {
       if (error instanceof WeatherProviderError) {
