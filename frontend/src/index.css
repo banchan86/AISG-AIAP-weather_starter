@@ -41,3 +41,31 @@ input:focus-visible {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ── Leaflet overrides ─────────────────────────────── */
+.leaflet-container {
+  background: #1a2535;
+  font-family: inherit;
+}
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.45) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 9px !important;
+}
+.leaflet-control-attribution a {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+.leaflet-control-attribution svg {
+  display: none;
+}
+.leaflet-control-zoom a {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+.leaflet-marker-shadow {
+  display: none !important;
+}
