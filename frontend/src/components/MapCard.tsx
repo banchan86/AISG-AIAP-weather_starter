@@ -173,8 +173,14 @@ function FullscreenMapModal({
       className="fixed inset-0 z-50 flex flex-col"
       style={{ background: 'rgba(20,30,46,0.92)', backdropFilter: 'blur(2px)' }}
     >
-      <div className="flex shrink-0 items-center justify-between border-b border-white/10 bg-black/30 px-5 py-3 backdrop-blur-xl">
-        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/60">
+      <div
+        className="flex shrink-0 items-center justify-between px-5 py-3 backdrop-blur-xl"
+        style={{
+          borderBottom: '1px solid var(--border-soft)',
+          backgroundColor: 'var(--sidebar-bg)',
+        }}
+      >
+        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-theme-muted">
           <MapIcon className="h-3.5 w-3.5" />
           <span>Map</span>
         </div>
@@ -182,7 +188,7 @@ function FullscreenMapModal({
           type="button"
           onClick={onClose}
           aria-label="Close fullscreen map"
-          className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] text-white/70 transition hover:bg-white/20 hover:text-white"
+          className="flex h-7 w-7 items-center justify-center rounded-full border border-theme bg-surface text-theme-muted transition hover:bg-surface-hover hover:text-theme"
         >
           ×
         </button>
@@ -219,12 +225,15 @@ export function MapCard() {
 
   if (!selected) {
     return (
-      <section className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl">
-        <header className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/60">
+      <section className="flex flex-col gap-3 rounded-2xl border border-theme bg-surface p-4 backdrop-blur-xl">
+        <header className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-theme-muted">
           <MapIcon className="h-3.5 w-3.5" />
           <span>Map</span>
         </header>
-        <div className="flex h-[220px] items-center justify-center rounded-xl bg-white/[0.04] text-sm text-white/40">
+        <div
+          className="flex h-[220px] items-center justify-center rounded-xl text-sm text-theme-faint"
+          style={{ backgroundColor: 'var(--surface-faint)' }}
+        >
           No locations to display
         </div>
       </section>
@@ -233,9 +242,9 @@ export function MapCard() {
 
   return (
     <>
-      <section className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl">
+      <section className="flex flex-col gap-3 rounded-2xl border border-theme bg-surface p-4 backdrop-blur-xl">
         <header className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/60">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-theme-muted">
             <MapIcon className="h-3.5 w-3.5" />
             <span>Map</span>
           </div>
@@ -243,7 +252,7 @@ export function MapCard() {
             type="button"
             onClick={() => setIsFullscreen(true)}
             aria-label="Expand map"
-            className="rounded-md p-1 text-white/50 transition hover:bg-white/10 hover:text-white/85"
+            className="rounded-md p-1 text-theme-faint transition hover:bg-surface-hover hover:text-theme-secondary"
           >
             <ExpandIcon className="h-3.5 w-3.5" />
           </button>

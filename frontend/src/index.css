@@ -2,6 +2,393 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ─────────────────────────────────────── */
+
+:root,
+[data-theme="apple"] {
+  --bg: linear-gradient(
+      170deg,
+      #6f8aa8 0%,
+      #5a7591 35%,
+      #4a627c 65%,
+      #3c5066 100%
+    ),
+    radial-gradient(120% 80% at 70% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(90% 70% at 10% 100%, rgba(80, 110, 150, 0.55) 0%, transparent 60%);
+  --bg-order: url("data:image/gif,") /* sentinel so background shorthand stacks */;
+
+  /* Sidebar */
+  --sidebar-bg: rgba(0, 0, 0, 0.20);
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-hover: rgba(255, 255, 255, 0.12);
+  --surface-active: rgba(255, 255, 255, 0.20);
+  --surface-subtle: rgba(255, 255, 255, 0.06);
+  --surface-faint: rgba(255, 255, 255, 0.04);
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.15);
+  --border-soft: rgba(255, 255, 255, 0.10);
+  --border-active: rgba(255, 255, 255, 0.30);
+
+  /* Text */
+  --text: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.70);
+  --text-faint: rgba(255, 255, 255, 0.55);
+  --text-placeholder: rgba(255, 255, 255, 0.50);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+
+  /* Leaflet */
+  --map-bg: #1a2535;
+  --map-control-bg: rgba(255, 255, 255, 0.12);
+  --map-control-bg-hover: rgba(255, 255, 255, 0.22);
+  --map-control-color: rgba(255, 255, 255, 0.85);
+  --map-control-border: rgba(255, 255, 255, 0.15);
+  --map-attr-bg: rgba(0, 0, 0, 0.45);
+  --map-attr-color: rgba(255, 255, 255, 0.50);
+  --map-attr-link: rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="arctic-glass"] {
+  --bg: linear-gradient(
+      170deg,
+      #ddeeff 0%,
+      #c8e0f8 30%,
+      #b0d0f0 60%,
+      #98c0e8 100%
+    ),
+    radial-gradient(110% 70% at 65% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 50%),
+    radial-gradient(80% 60% at 15% 100%, rgba(160, 200, 240, 0.40) 0%, transparent 55%);
+
+  --sidebar-bg: rgba(255, 255, 255, 0.28);
+  --sidebar-border: rgba(160, 200, 240, 0.20);
+
+  --surface: rgba(255, 255, 255, 0.38);
+  --surface-hover: rgba(255, 255, 255, 0.52);
+  --surface-active: rgba(255, 255, 255, 0.64);
+  --surface-subtle: rgba(255, 255, 255, 0.22);
+  --surface-faint: rgba(255, 255, 255, 0.12);
+
+  --border: rgba(140, 185, 230, 0.35);
+  --border-soft: rgba(140, 185, 230, 0.20);
+  --border-active: rgba(80, 150, 220, 0.60);
+
+  --text: rgba(10, 30, 60, 1);
+  --text-secondary: rgba(10, 30, 60, 0.82);
+  --text-muted: rgba(10, 30, 60, 0.58);
+  --text-faint: rgba(10, 30, 60, 0.40);
+  --text-placeholder: rgba(10, 30, 60, 0.35);
+
+  --scrollbar-thumb: rgba(100, 160, 220, 0.30);
+
+  --map-bg: #b8d4ec;
+  --map-control-bg: rgba(255, 255, 255, 0.60);
+  --map-control-bg-hover: rgba(255, 255, 255, 0.85);
+  --map-control-color: rgba(10, 30, 60, 0.85);
+  --map-control-border: rgba(140, 185, 230, 0.40);
+  --map-attr-bg: rgba(200, 225, 250, 0.75);
+  --map-attr-color: rgba(10, 30, 60, 0.50);
+  --map-attr-link: rgba(10, 30, 60, 0.72);
+}
+
+[data-theme="paper-map"] {
+  --bg: linear-gradient(
+      170deg,
+      #e8d8b0 0%,
+      #d9c49a 35%,
+      #c8ae82 65%,
+      #b8986a 100%
+    ),
+    radial-gradient(110% 70% at 65% 0%, rgba(255, 245, 210, 0.55) 0%, transparent 50%),
+    radial-gradient(80% 55% at 10% 95%, rgba(140, 100, 50, 0.30) 0%, transparent 55%);
+
+  --sidebar-bg: rgba(100, 70, 30, 0.22);
+  --sidebar-border: rgba(100, 70, 30, 0.18);
+
+  --surface: rgba(255, 248, 225, 0.50);
+  --surface-hover: rgba(255, 248, 225, 0.68);
+  --surface-active: rgba(255, 248, 225, 0.80);
+  --surface-subtle: rgba(255, 248, 225, 0.32);
+  --surface-faint: rgba(255, 248, 225, 0.18);
+
+  --border: rgba(100, 70, 30, 0.28);
+  --border-soft: rgba(100, 70, 30, 0.16);
+  --border-active: rgba(80, 50, 15, 0.55);
+
+  --text: rgba(40, 22, 5, 1);
+  --text-secondary: rgba(60, 35, 10, 0.88);
+  --text-muted: rgba(80, 55, 20, 0.68);
+  --text-faint: rgba(80, 55, 20, 0.48);
+  --text-placeholder: rgba(80, 55, 20, 0.38);
+
+  --scrollbar-thumb: rgba(100, 70, 30, 0.28);
+
+  --map-bg: #c8ae82;
+  --map-control-bg: rgba(255, 248, 225, 0.65);
+  --map-control-bg-hover: rgba(255, 248, 225, 0.88);
+  --map-control-color: rgba(40, 22, 5, 0.88);
+  --map-control-border: rgba(100, 70, 30, 0.30);
+  --map-attr-bg: rgba(184, 152, 106, 0.80);
+  --map-attr-color: rgba(40, 22, 5, 0.55);
+  --map-attr-link: rgba(40, 22, 5, 0.75);
+}
+
+[data-theme="solar-flare"] {
+  --bg: linear-gradient(
+      170deg,
+      #e8600a 0%,
+      #c94010 35%,
+      #a82510 65%,
+      #860e08 100%
+    ),
+    radial-gradient(110% 65% at 60% 0%, rgba(255, 200, 50, 0.35) 0%, transparent 50%),
+    radial-gradient(70% 50% at 5% 95%, rgba(180, 20, 10, 0.50) 0%, transparent 55%);
+
+  --sidebar-bg: rgba(60, 10, 5, 0.45);
+  --sidebar-border: rgba(255, 180, 50, 0.10);
+
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-hover: rgba(255, 255, 255, 0.14);
+  --surface-active: rgba(255, 200, 50, 0.18);
+  --surface-subtle: rgba(255, 255, 255, 0.05);
+  --surface-faint: rgba(255, 255, 255, 0.03);
+
+  --border: rgba(255, 180, 50, 0.28);
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(255, 200, 50, 0.65);
+
+  --text: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(255, 230, 180, 0.95);
+  --text-muted: rgba(255, 210, 150, 0.72);
+  --text-faint: rgba(255, 210, 150, 0.50);
+  --text-placeholder: rgba(255, 210, 150, 0.40);
+
+  --scrollbar-thumb: rgba(255, 180, 50, 0.28);
+
+  --map-bg: #2a0a04;
+  --map-control-bg: rgba(255, 255, 255, 0.10);
+  --map-control-bg-hover: rgba(255, 200, 50, 0.22);
+  --map-control-color: rgba(255, 230, 180, 0.92);
+  --map-control-border: rgba(255, 180, 50, 0.28);
+  --map-attr-bg: rgba(40, 8, 4, 0.70);
+  --map-attr-color: rgba(255, 210, 150, 0.50);
+  --map-attr-link: rgba(255, 200, 50, 0.75);
+}
+
+[data-theme="botanical"] {
+  --bg: linear-gradient(
+      170deg,
+      #2d4a2d 0%,
+      #243d24 35%,
+      #1c321c 65%,
+      #152615 100%
+    ),
+    radial-gradient(100% 65% at 70% 0%, rgba(120, 180, 80, 0.18) 0%, transparent 55%),
+    radial-gradient(80% 55% at 10% 95%, rgba(60, 100, 40, 0.40) 0%, transparent 60%);
+
+  --sidebar-bg: rgba(15, 28, 15, 0.55);
+  --sidebar-border: rgba(140, 200, 100, 0.08);
+
+  --surface: rgba(240, 230, 200, 0.07);
+  --surface-hover: rgba(240, 230, 200, 0.12);
+  --surface-active: rgba(240, 230, 200, 0.18);
+  --surface-subtle: rgba(240, 230, 200, 0.04);
+  --surface-faint: rgba(240, 230, 200, 0.02);
+
+  --border: rgba(140, 200, 100, 0.22);
+  --border-soft: rgba(140, 200, 100, 0.12);
+  --border-active: rgba(140, 200, 100, 0.50);
+
+  --text: rgba(240, 235, 210, 1);
+  --text-secondary: rgba(200, 230, 170, 0.95);
+  --text-muted: rgba(190, 220, 160, 0.70);
+  --text-faint: rgba(190, 220, 160, 0.48);
+  --text-placeholder: rgba(190, 220, 160, 0.38);
+
+  --scrollbar-thumb: rgba(140, 200, 100, 0.22);
+
+  --map-bg: #0f1e0f;
+  --map-control-bg: rgba(240, 230, 200, 0.10);
+  --map-control-bg-hover: rgba(140, 200, 100, 0.22);
+  --map-control-color: rgba(200, 230, 170, 0.92);
+  --map-control-border: rgba(140, 200, 100, 0.25);
+  --map-attr-bg: rgba(10, 20, 10, 0.65);
+  --map-attr-color: rgba(190, 220, 160, 0.50);
+  --map-attr-link: rgba(140, 200, 100, 0.75);
+}
+
+[data-theme="midnight-navy"] {
+  --bg: linear-gradient(
+      170deg,
+      #1a2340 0%,
+      #141b33 35%,
+      #0f1428 65%,
+      #090e1e 100%
+    ),
+    radial-gradient(90% 60% at 75% 5%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
+    radial-gradient(70% 50% at 10% 90%, rgba(30, 50, 100, 0.50) 0%, transparent 55%);
+
+  --sidebar-bg: rgba(9, 14, 30, 0.60);
+  --sidebar-border: rgba(212, 175, 55, 0.08);
+
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.09);
+  --surface-active: rgba(212, 175, 55, 0.12);
+  --surface-subtle: rgba(255, 255, 255, 0.03);
+  --surface-faint: rgba(255, 255, 255, 0.02);
+
+  --border: rgba(212, 175, 55, 0.18);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(212, 175, 55, 0.50);
+
+  --text: rgba(240, 235, 210, 1);
+  --text-secondary: rgba(212, 175, 55, 0.95);
+  --text-muted: rgba(200, 210, 230, 0.65);
+  --text-faint: rgba(200, 210, 230, 0.42);
+  --text-placeholder: rgba(200, 210, 230, 0.35);
+
+  --scrollbar-thumb: rgba(212, 175, 55, 0.20);
+
+  --map-bg: #080c18;
+  --map-control-bg: rgba(255, 255, 255, 0.07);
+  --map-control-bg-hover: rgba(212, 175, 55, 0.18);
+  --map-control-color: rgba(212, 175, 55, 0.90);
+  --map-control-border: rgba(212, 175, 55, 0.20);
+  --map-attr-bg: rgba(5, 8, 20, 0.70);
+  --map-attr-color: rgba(200, 210, 230, 0.45);
+  --map-attr-link: rgba(212, 175, 55, 0.65);
+}
+
+[data-theme="neon-storm"] {
+  --bg: linear-gradient(170deg, #0a0a1a 0%, #0d0d2b 40%, #080818 100%);
+
+  --sidebar-bg: rgba(0, 0, 0, 0.55);
+  --sidebar-border: rgba(0, 255, 255, 0.08);
+
+  --surface: rgba(0, 255, 255, 0.06);
+  --surface-hover: rgba(0, 255, 255, 0.12);
+  --surface-active: rgba(0, 255, 255, 0.18);
+  --surface-subtle: rgba(0, 255, 255, 0.04);
+  --surface-faint: rgba(0, 255, 255, 0.02);
+
+  --border: rgba(0, 255, 255, 0.25);
+  --border-soft: rgba(0, 255, 255, 0.12);
+  --border-active: rgba(0, 255, 255, 0.55);
+
+  --text: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(0, 255, 255, 0.95);
+  --text-muted: rgba(0, 255, 255, 0.70);
+  --text-faint: rgba(0, 255, 255, 0.50);
+  --text-placeholder: rgba(0, 255, 255, 0.40);
+
+  --scrollbar-thumb: rgba(0, 255, 255, 0.25);
+
+  --map-bg: #050510;
+  --map-control-bg: rgba(0, 255, 255, 0.10);
+  --map-control-bg-hover: rgba(0, 255, 255, 0.22);
+  --map-control-color: rgba(0, 255, 255, 0.90);
+  --map-control-border: rgba(0, 255, 255, 0.25);
+  --map-attr-bg: rgba(0, 0, 0, 0.70);
+  --map-attr-color: rgba(0, 255, 255, 0.50);
+  --map-attr-link: rgba(0, 255, 255, 0.70);
+}
+
+[data-theme="desert-sand"] {
+  --bg: linear-gradient(170deg, #c8a97a 0%, #b08b5c 35%, #8c6b3e 65%, #6b4e2a 100%);
+
+  --sidebar-bg: rgba(80, 40, 0, 0.30);
+  --sidebar-border: rgba(255, 220, 160, 0.08);
+
+  --surface: rgba(255, 220, 160, 0.12);
+  --surface-hover: rgba(255, 220, 160, 0.20);
+  --surface-active: rgba(255, 220, 160, 0.28);
+  --surface-subtle: rgba(255, 220, 160, 0.07);
+  --surface-faint: rgba(255, 220, 160, 0.04);
+
+  --border: rgba(255, 220, 160, 0.22);
+  --border-soft: rgba(255, 220, 160, 0.12);
+  --border-active: rgba(255, 220, 160, 0.45);
+
+  --text: rgba(255, 245, 220, 1);
+  --text-secondary: rgba(255, 240, 200, 0.92);
+  --text-muted: rgba(255, 230, 180, 0.75);
+  --text-faint: rgba(255, 230, 180, 0.58);
+  --text-placeholder: rgba(255, 230, 180, 0.48);
+
+  --scrollbar-thumb: rgba(255, 200, 120, 0.28);
+
+  --map-bg: #3d2810;
+  --map-control-bg: rgba(255, 220, 160, 0.14);
+  --map-control-bg-hover: rgba(255, 220, 160, 0.26);
+  --map-control-color: rgba(255, 240, 200, 0.90);
+  --map-control-border: rgba(255, 220, 160, 0.22);
+  --map-attr-bg: rgba(50, 25, 0, 0.55);
+  --map-attr-color: rgba(255, 220, 160, 0.55);
+  --map-attr-link: rgba(255, 220, 160, 0.75);
+}
+
+[data-theme="nordic-frost"] {
+  --bg: linear-gradient(170deg, #e8eef4 0%, #d0dce8 35%, #b8ccdc 65%, #a0bcd0 100%);
+
+  --sidebar-bg: rgba(200, 220, 240, 0.45);
+  --sidebar-border: rgba(80, 120, 160, 0.10);
+
+  --surface: rgba(255, 255, 255, 0.45);
+  --surface-hover: rgba(255, 255, 255, 0.62);
+  --surface-active: rgba(255, 255, 255, 0.72);
+  --surface-subtle: rgba(255, 255, 255, 0.30);
+  --surface-faint: rgba(255, 255, 255, 0.18);
+
+  --border: rgba(80, 120, 160, 0.20);
+  --border-soft: rgba(80, 120, 160, 0.12);
+  --border-active: rgba(80, 120, 160, 0.40);
+
+  --text: rgba(20, 40, 70, 1);
+  --text-secondary: rgba(20, 40, 70, 0.88);
+  --text-muted: rgba(20, 40, 70, 0.65);
+  --text-faint: rgba(20, 40, 70, 0.48);
+  --text-placeholder: rgba(20, 40, 70, 0.40);
+
+  --scrollbar-thumb: rgba(80, 120, 160, 0.25);
+
+  --map-bg: #c8d8e8;
+  --map-control-bg: rgba(255, 255, 255, 0.55);
+  --map-control-bg-hover: rgba(255, 255, 255, 0.80);
+  --map-control-color: rgba(20, 40, 70, 0.88);
+  --map-control-border: rgba(80, 120, 160, 0.22);
+  --map-attr-bg: rgba(200, 220, 240, 0.75);
+  --map-attr-color: rgba(20, 40, 70, 0.55);
+  --map-attr-link: rgba(20, 40, 70, 0.75);
+}
+
+/* ── Theme utility classes ────────────────────────────── */
+/* These map semantic theme tokens to reusable classes so  */
+/* components don't need inline CSS variables.             */
+
+.theme-bg-surface       { background-color: var(--surface); }
+.theme-bg-surface-hover { background-color: var(--surface-hover); }
+.theme-bg-surface-active{ background-color: var(--surface-active); }
+.theme-bg-subtle        { background-color: var(--surface-subtle); }
+.theme-bg-faint         { background-color: var(--surface-faint); }
+.theme-bg-sidebar       { background-color: var(--sidebar-bg); }
+
+.theme-border           { border-color: var(--border); }
+.theme-border-soft      { border-color: var(--border-soft); }
+.theme-border-active    { border-color: var(--border-active); }
+.theme-border-sidebar   { border-color: var(--sidebar-border); }
+
+.theme-text             { color: var(--text); }
+.theme-text-secondary   { color: var(--text-secondary); }
+.theme-text-muted       { color: var(--text-muted); }
+.theme-text-faint       { color: var(--text-faint); }
+
+/* ── Base styles ──────────────────────────────────────── */
+
 html,
 body,
 #root {
@@ -9,11 +396,9 @@ body,
 }
 
 body {
-  @apply text-white antialiased;
-  background:
-    radial-gradient(120% 80% at 70% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
-    radial-gradient(90% 70% at 10% 100%, rgba(80, 110, 150, 0.55) 0%, transparent 60%),
-    linear-gradient(170deg, #6f8aa8 0%, #5a7591 35%, #4a627c 65%, #3c5066 100%);
+  @apply antialiased;
+  color: var(--text);
+  background: var(--bg);
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
@@ -25,7 +410,8 @@ input {
 
 button:focus-visible,
 input:focus-visible {
-  @apply outline-none ring-2 ring-white/40 ring-offset-0;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--border-active);
 }
 
 ::-webkit-scrollbar {
@@ -34,7 +420,7 @@ input:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--scrollbar-thumb);
   border-radius: 9999px;
 }
 
@@ -42,29 +428,29 @@ input:focus-visible {
   background: transparent;
 }
 
-/* ── Leaflet overrides ─────────────────────────────── */
+/* ── Leaflet overrides ────────────────────────────────── */
 .leaflet-container {
-  background: #1a2535;
+  background: var(--map-bg);
   font-family: inherit;
 }
 .leaflet-control-attribution {
-  background: rgba(0, 0, 0, 0.45) !important;
-  color: rgba(255, 255, 255, 0.5) !important;
+  background: var(--map-attr-bg) !important;
+  color: var(--map-attr-color) !important;
   font-size: 9px !important;
 }
 .leaflet-control-attribution a {
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: var(--map-attr-link) !important;
 }
 .leaflet-control-attribution svg {
   display: none;
 }
 .leaflet-control-zoom a {
-  background: rgba(255, 255, 255, 0.12) !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
+  background: var(--map-control-bg) !important;
+  color: var(--map-control-color) !important;
+  border-color: var(--map-control-border) !important;
 }
 .leaflet-control-zoom a:hover {
-  background: rgba(255, 255, 255, 0.22) !important;
+  background: var(--map-control-bg-hover) !important;
 }
 .leaflet-marker-shadow {
   display: none !important;

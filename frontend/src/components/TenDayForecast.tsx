@@ -51,12 +51,12 @@ export function TenDayForecast({ weather }: TenDayForecastProps) {
   const range = computeWeekRange(days);
 
   return (
-    <section className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl">
-      <header className="flex items-center gap-2 border-b border-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/60">
+    <section className="rounded-2xl border border-theme bg-surface backdrop-blur-xl">
+      <header className="flex items-center gap-2 border-b border-theme-soft px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-theme-muted">
         <CalendarIcon />
         <span>{days.length}-Day Forecast</span>
       </header>
-      <ul className="divide-y divide-white/5">
+      <ul style={{ borderTop: 'none' }}>
         {days.length > 0 ? (
           days.map((day, index) => {
             const offsets = barOffsets(day, range);
@@ -64,13 +64,14 @@ export function TenDayForecast({ weather }: TenDayForecastProps) {
               <li
                 key={day.date}
                 className="grid grid-cols-[5rem_2rem_3rem_1fr_3rem] items-center gap-3 px-4 py-3 text-sm"
+                style={index > 0 ? { borderTop: '1px solid var(--border-soft)' } : undefined}
               >
-                <span className="font-medium text-white/95">{labelForDate(day.date, index)}</span>
-                <CloudIcon className="h-5 w-5 text-white/80" />
-                <span className="tabular-nums text-white/60">
+                <span className="font-medium text-theme">{labelForDate(day.date, index)}</span>
+                <CloudIcon className="h-5 w-5 text-theme-muted" />
+                <span className="tabular-nums text-theme-muted">
                   {formatTemperature(day.temperature_low_c)}
                 </span>
-                <div className="relative h-1.5 rounded-full bg-white/10">
+                <div className="relative h-1.5 rounded-full" style={{ background: 'var(--border-soft)' }}>
                   {offsets && (
                     <div
                       className="absolute top-0 h-1.5 rounded-full bg-gradient-to-r from-sky-300/80 via-amber-300/70 to-orange-300/80"
@@ -78,11 +79,11 @@ export function TenDayForecast({ weather }: TenDayForecastProps) {
                     />
                   )}
                 </div>
-                <span className="text-right tabular-nums text-white/95">
+                <span className="text-right tabular-nums text-theme">
                   {formatTemperature(day.temperature_high_c)}
                 </span>
                 {day.forecast && (
-                  <span className="col-span-5 -mt-1 truncate text-xs text-white/60">
+                  <span className="col-span-5 -mt-1 truncate text-xs text-theme-muted">
                     {day.forecast}
                   </span>
                 )}
@@ -90,7 +91,7 @@ export function TenDayForecast({ weather }: TenDayForecastProps) {
             );
           })
         ) : (
-          <li className="px-4 py-4 text-sm text-white/55">Forecast unavailable.</li>
+          <li className="px-4 py-4 text-sm text-theme-faint">Forecast unavailable.</li>
         )}
       </ul>
     </section>
