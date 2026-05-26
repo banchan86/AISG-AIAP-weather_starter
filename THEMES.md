@@ -147,13 +147,27 @@ Warm parchment gradient with ivory glass surfaces evoking aged paper. Ink-brown 
 
 ---
 
-## Planned themes (not yet implemented)
+### 9. Minimal Mono `minimal-mono` ✅
+**Black-and-white, razor-minimal.**
+
+Pure grayscale gradient from near-white to medium gray. High-opacity white surfaces keep cards bright and legible. Stark black text at full opacity with no color tint anywhere — every token is a shade of black or white. Razor-thin black borders. Closest to a traditional document/print aesthetic.
+
+| Attribute | Value |
+|---|---|
+| Background | `#f5f5f5 → #cccccc` plain grayscale gradient |
+| Surfaces | White at 60–95% opacity |
+| Borders | Black at 6–40% opacity |
+| Text | Pure black at 35–100% opacity |
+| Map | Mid-gray `#d8d8d8` with white-on-black controls |
+
+---
+
+## Planned Themes (Not Yet Implemented)
 
 Listed in original proposal order. Each can be added by defining a `[data-theme="<id>"]` block in `index.css` and registering the id/name in `theme.tsx` and a swatch gradient in `ThemeSelector.tsx`.
 
 | # | Name | ID | Description |
 |---|---|---|---|
-| 9 | Minimal Mono | `minimal-mono` | Black-and-white with one user-selectable accent. System monospace font, razor-thin borders, ultra-dense data table layout. |
 | 10 | Aurora Borealis | `aurora-borealis` | Deep purple-black with shifting green, teal, and violet gradients. Thin light sans-serif, floating cards, dramatic negative space. |
 | 11 | Cotton Cloud | `cotton-cloud` | Soft white, light sky blue, and lavender. Rounded cards with subtle drop shadows, friendly Nunito sans-serif, generous padding. |
 | 12 | Volcanic | `volcanic` | Dark charcoal and slate with lava-red and amber accents. Bold condensed font, sharp-edged cards, high-density compact layout. |

@@ -366,6 +366,40 @@
   --map-attr-link: rgba(20, 40, 70, 0.75);
 }
 
+[data-theme="minimal-mono"] {
+  --bg: linear-gradient(170deg, #f5f5f5 0%, #e8e8e8 40%, #d8d8d8 70%, #cccccc 100%);
+
+  --sidebar-bg: rgba(255, 255, 255, 0.70);
+  --sidebar-border: rgba(0, 0, 0, 0.08);
+
+  --surface: rgba(255, 255, 255, 0.60);
+  --surface-hover: rgba(255, 255, 255, 0.80);
+  --surface-active: rgba(255, 255, 255, 0.95);
+  --surface-subtle: rgba(255, 255, 255, 0.35);
+  --surface-faint: rgba(255, 255, 255, 0.20);
+
+  --border: rgba(0, 0, 0, 0.12);
+  --border-soft: rgba(0, 0, 0, 0.06);
+  --border-active: rgba(0, 0, 0, 0.40);
+
+  --text: rgba(0, 0, 0, 1);
+  --text-secondary: rgba(0, 0, 0, 0.75);
+  --text-muted: rgba(0, 0, 0, 0.50);
+  --text-faint: rgba(0, 0, 0, 0.35);
+  --text-placeholder: rgba(0, 0, 0, 0.28);
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.18);
+
+  --map-bg: #d8d8d8;
+  --map-control-bg: rgba(255, 255, 255, 0.70);
+  --map-control-bg-hover: rgba(255, 255, 255, 0.95);
+  --map-control-color: rgba(0, 0, 0, 0.85);
+  --map-control-border: rgba(0, 0, 0, 0.14);
+  --map-attr-bg: rgba(240, 240, 240, 0.85);
+  --map-attr-color: rgba(0, 0, 0, 0.50);
+  --map-attr-link: rgba(0, 0, 0, 0.70);
+}
+
 /* ── Theme utility classes ────────────────────────────── */
 /* These map semantic theme tokens to reusable classes so  */
 /* components don't need inline CSS variables.             */

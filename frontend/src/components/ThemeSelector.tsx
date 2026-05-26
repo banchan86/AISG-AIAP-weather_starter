@@ -107,6 +107,7 @@ const SWATCH_COLORS: Record<string, string> = {
   'nordic-frost': 'linear-gradient(135deg, #e8eef4, #a0bcd0)',
   'paper-map': 'linear-gradient(135deg, #e8d8b0, #b8986a)',
   'solar-flare': 'linear-gradient(135deg, #e8600a, #860e08)',
+  'minimal-mono': 'linear-gradient(135deg, #f5f5f5, #888888)',
 };
 
 function ThemeSwatch({ id }: { id: string }) {

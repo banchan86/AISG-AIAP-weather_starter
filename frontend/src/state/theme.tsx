@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-export type ThemeId = 'apple' | 'arctic-glass' | 'botanical' | 'midnight-navy' | 'neon-storm' | 'desert-sand' | 'nordic-frost' | 'paper-map' | 'solar-flare';
+export type ThemeId = 'apple' | 'arctic-glass' | 'botanical' | 'midnight-navy' | 'neon-storm' | 'desert-sand' | 'nordic-frost' | 'paper-map' | 'solar-flare' | 'minimal-mono';
 
 export interface Theme {
   id: ThemeId;
@@ -17,6 +17,7 @@ export const THEMES: Theme[] = [
   { id: 'nordic-frost', name: 'Nordic Frost' },
   { id: 'paper-map', name: 'Paper Map' },
   { id: 'solar-flare', name: 'Solar Flare' },
+  { id: 'minimal-mono', name: 'Minimal Mono' },
 ];
 
 interface ThemeContextValue {
