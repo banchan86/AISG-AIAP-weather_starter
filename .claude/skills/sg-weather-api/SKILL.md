@@ -11,10 +11,10 @@ Reference for the data.gov.sg endpoints consumed by [`SingaporeWeatherClient`](.
 
 Two hosts are in play. **Do not assume one is a synonym for the other** — they serve different versions and shapes.
 
-| Host | Used for | Notes |
-|---|---|---|
-| `https://api-open.data.gov.sg` | All `v2/real-time/api/*` endpoints | Default. No key required for light use; pass `WEATHER_API_KEY` via `x-api-key` for higher limits. |
-| `https://api.data.gov.sg` | `v1/environment/4-day-weather-forecast` only | Legacy. Different envelope shape (no `data:` wrapper, `items[]` at root). |
+| Host                           | Used for                                     | Notes                                                                                             |
+| ------------------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `https://api-open.data.gov.sg` | All `v2/real-time/api/*` endpoints           | Default. No key required for light use; pass `WEATHER_API_KEY` via `x-api-key` for higher limits. |
+| `https://api.data.gov.sg`      | `v1/environment/4-day-weather-forecast` only | Legacy. Different envelope shape (no `data:` wrapper, `items[]` at root).                         |
 
 The code splits these as [`apiBaseUrl()`](../../../backend/src/weather.ts#L384) vs [`legacyApiBaseUrl()`](../../../backend/src/weather.ts#L388).
 
@@ -22,19 +22,19 @@ The code splits these as [`apiBaseUrl()`](../../../backend/src/weather.ts#L384) 
 
 All v2 endpoints return `{ code, errorMsg, data: { ... } }`. A non-zero `code` means failure — the client throws [`WeatherProviderError`](../../../backend/src/weather.ts#L1) in that case. The legacy v1 endpoint returns `{ items: [...] }` at the root with no `code`.
 
-| Endpoint | Host | Returns | Maps to `WeatherSnapshot` field |
-|---|---|---|---|
-| `GET /v2/real-time/api/two-hr-forecast` | open | `data.area_metadata[]`, `data.items[].forecasts[]` | `condition`, `area`, `valid_period_text`, `observed_at` |
-| `GET /v2/real-time/api/air-temperature` | open | `data.stations[]`, `data.readings[0].data[]` (°C) | `temperature_c` |
-| `GET /v2/real-time/api/relative-humidity` | open | same shape as air-temperature (%) | `humidity_percent` |
-| `GET /v2/real-time/api/rainfall` | open | same shape (mm over last 5 min) | `rainfall_mm` |
-| `GET /v2/real-time/api/wind-speed` | open | same shape (knots) | `wind_speed_knots` |
-| `GET /v2/real-time/api/wind-direction` | open | same shape (degrees, 0=N) | `wind_direction_degrees` |
-| `GET /v2/real-time/api/uv` | open | `data.records[0].index[0].value` | `uv_index` |
-| `GET /v2/real-time/api/psi` | open | `data.regionMetadata[]`, `data.items[0].readings.psi_twenty_four_hourly[region]` | `psi_twenty_four_hourly`, `air_quality_region` |
-| `GET /v2/real-time/api/pm25` | open | `data.items[0].readings.pm25_one_hourly[region]` | `pm25_one_hourly` |
-| `GET /v2/real-time/api/twenty-four-hr-forecast` | open | `data.records[0].general.temperature.{low,high}`, `periods[]` | `forecast_low_c`, `forecast_high_c`, `forecast_periods` |
-| `GET /v1/environment/4-day-weather-forecast` | legacy | `items[0].forecasts[]` with `date`, `forecast`, `temperature.{low,high}` | `daily_forecast` |
+| Endpoint                                        | Host   | Returns                                                                          | Maps to `WeatherSnapshot` field                         |
+| ----------------------------------------------- | ------ | -------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `GET /v2/real-time/api/two-hr-forecast`         | open   | `data.area_metadata[]`, `data.items[].forecasts[]`                               | `condition`, `area`, `valid_period_text`, `observed_at` |
+| `GET /v2/real-time/api/air-temperature`         | open   | `data.stations[]`, `data.readings[0].data[]` (°C)                                | `temperature_c`                                         |
+| `GET /v2/real-time/api/relative-humidity`       | open   | same shape as air-temperature (%)                                                | `humidity_percent`                                      |
+| `GET /v2/real-time/api/rainfall`                | open   | same shape (mm over last 5 min)                                                  | `rainfall_mm`                                           |
+| `GET /v2/real-time/api/wind-speed`              | open   | same shape (knots)                                                               | `wind_speed_knots`                                      |
+| `GET /v2/real-time/api/wind-direction`          | open   | same shape (degrees, 0=N)                                                        | `wind_direction_degrees`                                |
+| `GET /v2/real-time/api/uv`                      | open   | `data.records[0].index[0].value`                                                 | `uv_index`                                              |
+| `GET /v2/real-time/api/psi`                     | open   | `data.regionMetadata[]`, `data.items[0].readings.psi_twenty_four_hourly[region]` | `psi_twenty_four_hourly`, `air_quality_region`          |
+| `GET /v2/real-time/api/pm25`                    | open   | `data.items[0].readings.pm25_one_hourly[region]`                                 | `pm25_one_hourly`                                       |
+| `GET /v2/real-time/api/twenty-four-hr-forecast` | open   | `data.records[0].general.temperature.{low,high}`, `periods[]`                    | `forecast_low_c`, `forecast_high_c`, `forecast_periods` |
+| `GET /v1/environment/4-day-weather-forecast`    | legacy | `items[0].forecasts[]` with `date`, `forecast`, `temperature.{low,high}`         | `daily_forecast`                                        |
 
 The README's "External API Reference" table lists 24-hour at `/v1/environment/24-hour-weather-forecast`. The code uses the **v2** path `/v2/real-time/api/twenty-four-hr-forecast` — trust the code.
 
@@ -44,7 +44,7 @@ The README's "External API Reference" table lists 24-hour at `/v1/environment/24
 
 **`label_location` vs `labelLocation`.** Forecast areas (two-hr-forecast) use `label_location` (snake_case). PSI/PM2.5 region metadata uses `labelLocation` (camelCase). Don't unify them — they come from the API that way.
 
-**Readings without a value.** A `stations[]` entry may not appear in `readings[0].data[]`. The client filters to stations that *have* a value before computing the nearest station (see [`nearestStation`](../../../backend/src/weather.ts#L575)), so the "nearest" can shift when stations drop offline.
+**Readings without a value.** A `stations[]` entry may not appear in `readings[0].data[]`. The client filters to stations that _have_ a value before computing the nearest station (see [`nearestStation`](../../../backend/src/weather.ts#L575)), so the "nearest" can shift when stations drop offline.
 
 **PSI is regional, not point.** PSI and PM2.5 only have five values: `north`, `south`, `east`, `west`, `central`. The client picks the nearest region's value. If `air_quality_region` is `null`, the nearest-region lookup failed and both PSI and PM2.5 will be `null` too.
 

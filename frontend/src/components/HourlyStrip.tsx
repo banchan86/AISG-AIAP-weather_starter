@@ -38,7 +38,9 @@ export function HourlyStrip({ periods = [] }: HourlyStripProps) {
       </p>
       <div
         className="grid"
-        style={{ gridTemplateColumns: `repeat(${slots.length}, minmax(0, 1fr))` }}
+        style={{
+          gridTemplateColumns: `repeat(${slots.length}, minmax(0, 1fr))`,
+        }}
       >
         {slots.map((slot, i) => {
           const isFair = slot.forecast?.toLowerCase().includes('fair');
@@ -46,15 +48,23 @@ export function HourlyStrip({ periods = [] }: HourlyStripProps) {
             <div
               key={slot.key}
               className="flex flex-col items-center gap-2 px-2 py-4 text-center"
-              style={i > 0 ? { borderLeft: '1px solid var(--border-soft)' } : undefined}
+              style={
+                i > 0
+                  ? { borderLeft: '1px solid var(--border-soft)' }
+                  : undefined
+              }
             >
-              <div className="text-xs font-medium text-theme-secondary">{slot.label}</div>
+              <div className="text-xs font-medium text-theme-secondary">
+                {slot.label}
+              </div>
               {isFair ? (
                 <SunIcon className="h-7 w-7 text-amber-300" />
               ) : (
                 <CloudIcon className="h-7 w-7 text-theme-secondary" />
               )}
-              <div className="text-xs leading-snug text-theme-secondary">{slot.forecast}</div>
+              <div className="text-xs leading-snug text-theme-secondary">
+                {slot.forecast}
+              </div>
             </div>
           );
         })}

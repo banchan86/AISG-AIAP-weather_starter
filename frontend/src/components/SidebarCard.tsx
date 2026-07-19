@@ -14,7 +14,8 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
   const isSelected = selectedId === location.id;
   const observed = formatTime(location.weather.observed_at);
   const area =
-    location.weather.area || `${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)}`;
+    location.weather.area ||
+    `${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)}`;
   const condition = location.weather.condition || '-';
   const temperature = formatTemperature(location.weather.temperature_c);
   const high = formatTemperature(location.weather.forecast_high_c);
@@ -43,14 +44,20 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
       className="relative w-full cursor-pointer overflow-hidden rounded-2xl border text-left backdrop-blur-xl transition"
       style={{
         borderColor: isSelected ? 'var(--border-active)' : 'var(--border-soft)',
-        backgroundColor: isSelected ? 'var(--surface-active)' : 'var(--surface)',
+        backgroundColor: isSelected
+          ? 'var(--surface-active)'
+          : 'var(--surface)',
         boxShadow: isSelected ? '0 8px 24px rgba(0,0,0,0.2)' : undefined,
       }}
       onMouseEnter={(e) => {
-        if (!isSelected) (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--surface-hover)';
+        if (!isSelected)
+          (e.currentTarget as HTMLElement).style.backgroundColor =
+            'var(--surface-hover)';
       }}
       onMouseLeave={(e) => {
-        if (!isSelected) (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--surface)';
+        if (!isSelected)
+          (e.currentTarget as HTMLElement).style.backgroundColor =
+            'var(--surface)';
       }}
     >
       <button
@@ -62,7 +69,9 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
       </button>
       <div className="flex items-start justify-between gap-3 px-4 pt-3">
         <div className="min-w-0">
-          <div className="truncate text-lg font-semibold leading-tight text-theme">{area}</div>
+          <div className="truncate text-lg font-semibold leading-tight text-theme">
+            {area}
+          </div>
           <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-theme-muted">
             {isHome ? (
               <>
@@ -78,7 +87,9 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
             )}
           </div>
         </div>
-        <div className="text-3xl font-light tabular-nums text-theme-secondary">{temperature}</div>
+        <div className="text-3xl font-light tabular-nums text-theme-secondary">
+          {temperature}
+        </div>
       </div>
       <div
         className="mt-3 flex items-center justify-between px-4 py-2 text-xs"

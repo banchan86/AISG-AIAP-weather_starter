@@ -1,4 +1,11 @@
-import { CloudIcon, DropletIcon, SunIcon, ThermometerIcon, TrendIcon, WindIcon } from './icons';
+import {
+  CloudIcon,
+  DropletIcon,
+  SunIcon,
+  ThermometerIcon,
+  TrendIcon,
+  WindIcon,
+} from './icons';
 import type { ReactNode } from 'react';
 import type { WeatherSnapshot } from '../types';
 
@@ -112,15 +119,23 @@ export function WindTile({ weather }: WeatherProps) {
         <ul className="space-y-2 text-sm">
           <li
             className={`flex justify-between ${hasDirection ? 'pb-2' : ''}`}
-            style={hasDirection ? { borderBottom: '1px solid var(--border-soft)' } : undefined}
+            style={
+              hasDirection
+                ? { borderBottom: '1px solid var(--border-soft)' }
+                : undefined
+            }
           >
             <span className="text-theme-muted">Wind</span>
-            <span className="tabular-nums text-theme-secondary">{speed} km/h</span>
+            <span className="tabular-nums text-theme-secondary">
+              {speed} km/h
+            </span>
           </li>
           {hasDirection && (
             <li className="flex justify-between">
               <span className="text-theme-muted">Direction</span>
-              <span className="tabular-nums text-theme-secondary">{direction}&deg;</span>
+              <span className="tabular-nums text-theme-secondary">
+                {direction}&deg;
+              </span>
             </li>
           )}
         </ul>
@@ -141,12 +156,23 @@ function Compass({ speed, direction }: CompassProps) {
   return (
     <div
       className="relative h-20 w-20 rounded-full"
-      style={{ border: '1px solid var(--border)', backgroundColor: 'var(--surface-faint)' }}
+      style={{
+        border: '1px solid var(--border)',
+        backgroundColor: 'var(--surface-faint)',
+      }}
     >
-      <span className="absolute left-1/2 top-1 -translate-x-1/2 text-[10px] text-theme-faint">N</span>
-      <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[10px] text-theme-faint">E</span>
-      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] text-theme-faint">S</span>
-      <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[10px] text-theme-faint">W</span>
+      <span className="absolute left-1/2 top-1 -translate-x-1/2 text-[10px] text-theme-faint">
+        N
+      </span>
+      <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[10px] text-theme-faint">
+        E
+      </span>
+      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] text-theme-faint">
+        S
+      </span>
+      <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[10px] text-theme-faint">
+        W
+      </span>
       {hasDirection && (
         <div
           className="absolute left-1/2 top-2 h-7 w-px origin-[50%_30px] -translate-x-1/2 rounded-full bg-theme-secondary"
@@ -154,7 +180,9 @@ function Compass({ speed, direction }: CompassProps) {
         />
       )}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-base font-light leading-none text-theme-secondary">{speed}</span>
+        <span className="text-base font-light leading-none text-theme-secondary">
+          {speed}
+        </span>
         <span className="text-[10px] text-theme-faint">km/h</span>
       </div>
     </div>
@@ -176,13 +204,17 @@ export function UVTile({ weather }: WeatherProps) {
       <div className="text-4xl font-light leading-none text-theme">
         {formatNumber(weather?.uv_index)}
       </div>
-      <div className="mt-1 text-base text-theme-secondary">{uvLabel(weather?.uv_index)}</div>
+      <div className="mt-1 text-base text-theme-secondary">
+        {uvLabel(weather?.uv_index)}
+      </div>
       <ScaleBar
         value={weather?.uv_index}
         max={11}
         gradientClass="bg-gradient-to-r from-emerald-400 via-yellow-300 via-orange-400 to-fuchsia-500"
       />
-      <p className="mt-3 text-xs leading-snug text-theme-muted">Latest nationwide UVI reading.</p>
+      <p className="mt-3 text-xs leading-snug text-theme-muted">
+        Latest nationwide UVI reading.
+      </p>
     </TileShell>
   );
 }
@@ -207,7 +239,9 @@ export function PrecipitationTile({ weather }: WeatherProps) {
         {formatNumber(weather?.rainfall_mm, 1)} mm
       </div>
       <div className="mt-1 text-sm text-theme-secondary">Latest reading</div>
-      <p className="mt-3 text-xs leading-snug text-theme-muted">Nearest realtime rainfall station.</p>
+      <p className="mt-3 text-xs leading-snug text-theme-muted">
+        Nearest realtime rainfall station.
+      </p>
     </TileShell>
   );
 }
@@ -218,7 +252,9 @@ export function HumidityTile({ weather }: WeatherProps) {
       <div className="text-4xl font-light leading-none tabular-nums text-theme">
         {formatNumber(weather?.humidity_percent)}%
       </div>
-      <p className="mt-3 text-xs leading-snug text-theme-muted">Nearest realtime humidity station.</p>
+      <p className="mt-3 text-xs leading-snug text-theme-muted">
+        Nearest realtime humidity station.
+      </p>
     </TileShell>
   );
 }
@@ -238,7 +274,9 @@ export function AveragesTile({ weather }: WeatherProps) {
           style={{ borderTop: '1px solid var(--border-soft)' }}
         >
           <span>Today</span>
-          <span className="tabular-nums">H:{formatTemperature(weather?.forecast_high_c)}&deg;</span>
+          <span className="tabular-nums">
+            H:{formatTemperature(weather?.forecast_high_c)}&deg;
+          </span>
         </li>
       </ul>
     </TileShell>

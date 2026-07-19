@@ -1,0 +1,4 @@
+dist
+backend/drizzle
+backend/logs
+package-lock.json

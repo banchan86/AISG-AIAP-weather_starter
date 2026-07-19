@@ -7,21 +7,31 @@ import {
   listLocations,
   updateWeather,
 } from '../db.js';
-import { SingaporeWeatherClient, WeatherProviderError, type WeatherSnapshot } from '../weather.js';
+import {
+  SingaporeWeatherClient,
+  WeatherProviderError,
+  type WeatherSnapshot,
+} from '../weather.js';
 import { logger } from '../logger.js';
 
 export interface WeatherClient {
-  getCurrentWeather(latitude: number, longitude: number): Promise<WeatherSnapshot>;
+  getCurrentWeather(
+    latitude: number,
+    longitude: number,
+  ): Promise<WeatherSnapshot>;
 }
 
 interface LocationsRouterOptions {
   weatherClient?: WeatherClient;
 }
 
-export function createLocationsRouter(options: LocationsRouterOptions = {}): Router {
+export function createLocationsRouter(
+  options: LocationsRouterOptions = {},
+): Router {
   const router: Router = createRouter();
   const weatherClient =
-    options.weatherClient ?? new SingaporeWeatherClient({ apiKey: process.env.WEATHER_API_KEY });
+    options.weatherClient ??
+    new SingaporeWeatherClient({ apiKey: process.env.WEATHER_API_KEY });
 
   router.get('/locations', async (_request, response, next) => {
     try {
@@ -37,12 +47,22 @@ export function createLocationsRouter(options: LocationsRouterOptions = {}): Rou
       const longitude = Number(request.body?.longitude);
 
       if (Number.isNaN(latitude) || Number.isNaN(longitude)) {
-        response.status(422).json({ detail: 'latitude and longitude are required' });
+        response
+          .status(422)
+          .json({ detail: 'latitude and longitude are required' });
         return;
       }
-      if (!(1.1 <= latitude && latitude <= 1.5 && 103.6 <= longitude && longitude <= 104.1)) {
+      if (
+        !(
+          1.1 <= latitude &&
+          latitude <= 1.5 &&
+          103.6 <= longitude &&
+          longitude <= 104.1
+        )
+      ) {
         response.status(422).json({
-          detail: 'Coordinates must be within Singapore (lat 1.1-1.5, lon 103.6-104.1)',
+          detail:
+            'Coordinates must be within Singapore (lat 1.1-1.5, lon 103.6-104.1)',
         });
         return;
       }
@@ -101,35 +121,41 @@ export function createLocationsRouter(options: LocationsRouterOptions = {}): Rou
     }
   });
 
-  router.post('/locations/:locationId/refresh', async (request, response, next) => {
-    try {
-      const locationId = Number(request.params.locationId);
-      const location = await getLocation(locationId);
-      if (!location) {
-        response.status(404).json({ detail: 'Location not found' });
-        return;
+  router.post(
+    '/locations/:locationId/refresh',
+    async (request, response, next) => {
+      try {
+        const locationId = Number(request.params.locationId);
+        const location = await getLocation(locationId);
+        if (!location) {
+          response.status(404).json({ detail: 'Location not found' });
+          return;
+        }
+
+        const snapshot = await weatherClient.getCurrentWeather(
+          location.latitude,
+          location.longitude,
+        );
+
+        // Preserve previously-known fields when a transient API failure returns null,
+        // so a rate-limited two-hr-forecast call doesn't wipe the stored area name.
+        const merged = {
+          ...snapshot,
+          area: snapshot.area ?? location.weather.area,
+          condition: snapshot.condition || location.weather.condition,
+        };
+
+        const updated = await updateWeather(locationId, merged);
+        response.json(updated);
+      } catch (error) {
+        if (error instanceof WeatherProviderError) {
+          response.status(502).json({ detail: error.message });
+          return;
+        }
+        next(error);
       }
-
-      const snapshot = await weatherClient.getCurrentWeather(location.latitude, location.longitude);
-
-      // Preserve previously-known fields when a transient API failure returns null,
-      // so a rate-limited two-hr-forecast call doesn't wipe the stored area name.
-      const merged = {
-        ...snapshot,
-        area: snapshot.area ?? location.weather.area,
-        condition: snapshot.condition || location.weather.condition,
-      };
-
-      const updated = await updateWeather(locationId, merged);
-      response.json(updated);
-    } catch (error) {
-      if (error instanceof WeatherProviderError) {
-        response.status(502).json({ detail: error.message });
-        return;
-      }
-      next(error);
-    }
-  });
+    },
+  );
 
   return router;
 }

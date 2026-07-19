@@ -6,7 +6,8 @@ import type { DivIcon } from 'leaflet';
 import { useStore } from '../state/store';
 import type { Location } from '../types';
 
-const TILE_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+const TILE_URL =
+  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
 const TILE_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 const DEFAULT_ZOOM = 12;
@@ -54,9 +55,13 @@ function buildPinIcon(label: string, isSelected: boolean): DivIcon {
 }
 
 function pinLabel(loc: Location): string {
-  const area = loc.weather?.area ?? `${loc.latitude.toFixed(2)},${loc.longitude.toFixed(2)}`;
+  const area =
+    loc.weather?.area ??
+    `${loc.latitude.toFixed(2)},${loc.longitude.toFixed(2)}`;
   const temp =
-    loc.weather?.temperature_c != null ? ` ${Math.round(loc.weather.temperature_c)}°` : '';
+    loc.weather?.temperature_c != null
+      ? ` ${Math.round(loc.weather.temperature_c)}°`
+      : '';
   return `${area}${temp}`;
 }
 
@@ -202,8 +207,16 @@ function FullscreenMapModal({
           attributionControl
         >
           <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} />
-          <MapFlyTo lat={selected.latitude} lng={selected.longitude} zoom={DEFAULT_ZOOM} />
-          <MapPins locations={locations} selectedId={selectedId} onSelect={onSelect} />
+          <MapFlyTo
+            lat={selected.latitude}
+            lng={selected.longitude}
+            zoom={DEFAULT_ZOOM}
+          />
+          <MapPins
+            locations={locations}
+            selectedId={selectedId}
+            onSelect={onSelect}
+          />
         </MapContainer>
       </div>
     </div>
@@ -214,7 +227,8 @@ export function MapCard() {
   const { locations, selectedId, select } = useStore();
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const selected = locations.find((l) => l.id === selectedId) ?? locations[0] ?? null;
+  const selected =
+    locations.find((l) => l.id === selectedId) ?? locations[0] ?? null;
 
   const handleSelect = useCallback(
     (id: number) => {
@@ -267,8 +281,16 @@ export function MapCard() {
             attributionControl
           >
             <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} />
-            <MapFlyTo lat={selected.latitude} lng={selected.longitude} zoom={DEFAULT_ZOOM} />
-            <MapPins locations={locations} selectedId={selectedId} onSelect={handleSelect} />
+            <MapFlyTo
+              lat={selected.latitude}
+              lng={selected.longitude}
+              zoom={DEFAULT_ZOOM}
+            />
+            <MapPins
+              locations={locations}
+              selectedId={selectedId}
+              onSelect={handleSelect}
+            />
           </MapContainer>
         </div>
       </section>

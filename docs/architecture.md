@@ -25,12 +25,12 @@ Weather data is not fetched on every page load. When a location is created or re
 
 ## Key Source Files
 
-| Purpose | File |
-|---|---|
-| API routes | [backend/src/routes/locations.ts](../backend/src/routes/locations.ts) |
-| Weather API client | [backend/src/weather.ts](../backend/src/weather.ts) |
-| Database access layer | [backend/src/db.ts](../backend/src/db.ts) |
-| SQLite schema | [backend/src/schema.ts](../backend/src/schema.ts) |
-| Express app + Vite middleware | [backend/src/server.ts](../backend/src/server.ts) |
-| Global frontend state | [frontend/src/state/store.tsx](../frontend/src/state/store.tsx) |
-| Frontend API calls | [frontend/src/api.ts](../frontend/src/api.ts) |
+| Purpose                       | File                                                                  |
+| ----------------------------- | --------------------------------------------------------------------- |
+| API routes                    | [backend/src/routes/locations.ts](../backend/src/routes/locations.ts) |
+| Weather API client            | [backend/src/weather.ts](../backend/src/weather.ts)                   |
+| Database access layer         | [backend/src/db.ts](../backend/src/db.ts)                             |
+| SQLite schema                 | [backend/src/schema.ts](../backend/src/schema.ts)                     |
+| Express app + Vite middleware | [backend/src/server.ts](../backend/src/server.ts)                     |
+| Global frontend state         | [frontend/src/state/store.tsx](../frontend/src/state/store.tsx)       |
+| Frontend API calls            | [frontend/src/api.ts](../frontend/src/api.ts)                         |

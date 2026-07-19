@@ -1,6 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-export type ThemeId = 'apple' | 'arctic-glass' | 'botanical' | 'midnight-navy' | 'neon-storm' | 'desert-sand' | 'nordic-frost' | 'paper-map' | 'solar-flare' | 'minimal-mono';
+export type ThemeId =
+  | 'apple'
+  | 'arctic-glass'
+  | 'botanical'
+  | 'midnight-navy'
+  | 'neon-storm'
+  | 'desert-sand'
+  | 'nordic-frost'
+  | 'paper-map'
+  | 'solar-flare'
+  | 'minimal-mono';
 
 export interface Theme {
   id: ThemeId;
@@ -47,7 +57,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (id: ThemeId) => setThemeState(id);
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {
