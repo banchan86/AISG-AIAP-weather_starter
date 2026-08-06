@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useStore } from '../state/store';
 import { SearchIcon } from './icons';
 import { SidebarCard } from './SidebarCard';
-import { AddLocationForm } from './AddLocationForm';
+import { LocationActions } from './LocationActions';
 
 export function Sidebar() {
   const { locations, isLoading } = useStore();
@@ -37,7 +37,7 @@ export function Sidebar() {
         />
       </div>
 
-      <AddLocationForm />
+      <LocationActions />
 
       <div className="flex flex-col gap-2 overflow-y-auto pr-1">
         {isLoading && locations.length === 0 ? (
