@@ -68,7 +68,7 @@ export function AddLocationForm() {
             onChange={(e) => setLatitude(e.target.value)}
             placeholder="1.3508"
             required
-            className="rounded-md border border-theme bg-surface px-2 py-1.5 text-sm text-theme placeholder:text-theme-placeholder"
+            className="w-full rounded-md border border-theme bg-surface px-2 py-1.5 text-sm text-theme placeholder:text-theme-placeholder"
           />
         </label>
         <label className="grid gap-1">
@@ -80,7 +80,7 @@ export function AddLocationForm() {
             onChange={(e) => setLongitude(e.target.value)}
             placeholder="103.8390"
             required
-            className="rounded-md border border-theme bg-surface px-2 py-1.5 text-sm text-theme placeholder:text-theme-placeholder"
+            className="w-full rounded-md border border-theme bg-surface px-2 py-1.5 text-sm text-theme placeholder:text-theme-placeholder"
           />
         </label>
       </div>
